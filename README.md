@@ -10,7 +10,7 @@ This Chatroom Chrom Extension is developed for improving the Chatroom features a
 </p>
 
 ## How to use ?
-<p float="left">
+<p align="middle" float="left">
     <img src="screenshots/Extension.png" style="margin:10px;" width="200px" height="400px">
     <img src="screenshots/demo.png" style="margin:10px;" width="400px" height="400px">
 </p>
