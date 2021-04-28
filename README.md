@@ -1,5 +1,5 @@
 <div id="main_container" align="center">
-    <h1 style="background-color:lightgreen;padding:10px">
+    <h1 style="background-color:green;padding:10px">
         Chatroom Chrome Extension
     </h1>
 </div>
