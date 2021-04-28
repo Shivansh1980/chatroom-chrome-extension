@@ -10,8 +10,10 @@ This Chatroom Chrom Extension is developed for improving the Chatroom features a
 </p>
 
 ## How to use ?
-<img src="screenshots/Extension.png" width="200px" height="400px">
-<img src="screenshots/demo.png" width="200px" height="400px">
+<p float="left">
+    <img src="screenshots/Extension.png" style="margin:10px;" width="200px" height="400px">
+    <img src="screenshots/demo.png" style="margin:10px;" width="400px" height="400px">
+</p>
 <p>
     1. Write username which you have already created on Awesome Chatroom(its another project that I have developed and its also available on my github repo you can check it out) <br>
     2. Enter room name to which you want to send messages after connection <br>
