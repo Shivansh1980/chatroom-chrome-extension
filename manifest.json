@@ -1,0 +1,36 @@
+{
+    "manifest_version": 2,
+    "name": "Chatroom Extension",
+    "version": "1.0.0",
+    "description": "Created By Shivansh Shrivastava",
+    "browser_action": {
+        "default_icon": "logo/chat-room-icon.jpg",
+        "default_popup":"popup.html"
+    },
+    "background":{
+        "scripts": ["js/jquery.js","js/jquery-ui.js","js/background.js"],
+        "persistent": true
+    },
+    "icons": {
+        "16": "logo/chat-room-icon.jpg",
+        "48": "logo/chat-room-icon.jpg",
+        "128": "logo/chat-room-icon.jpg"
+    },
+    "content_scripts": [
+        {
+            "matches":["<all_urls>"],
+            "css":["css/frontend.css"],
+            "js":["js/jquery.js","js/jquery-ui.js","js/content.js"]
+        }
+    ],
+    "permissions": [
+        "storage",
+        "bookmarks",
+        "tabs",
+        "activeTab",
+        "<all_urls>"
+    ],
+    "web_accessible_resources": [
+        "css/moodle.css"
+    ]
+}

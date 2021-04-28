@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatroom Extension</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/popup.js"></script>
+    <style>
+        *{
+            margin: 0px;
+            padding: 5px;
+        }
+        body{
+            background-color:greenyellow;
+        }
+        #popup_heading{
+            border: 1px solid black;
+            color: green;
+            font-size: 15px;
+            text-align: center;
+            margin-bottom: 10px;
+            background-color: gold;
+        }
+        .connection_form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .connect_message{
+            margin: 5px;
+            margin-bottom: 5px;
+            padding: 1px;
+            color: green;
+            font-weight: bolder;
+        }
+        button{
+            font-size: 11px;
+            width: 70%;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h2 id="popup_heading">Created By Shivansh Shrivastava</h2>
+    <div class="connection_form">
+        <input id="username" type="text" placeholder="Enter Username : ">
+        <input id="roomname" type="text" placeholder="Enter Room Name: ">
+        <button id="connect_awesome_chatroom">Connect Awesome Chatroom</button>
+        <p class="connect_message"></p>
+        <button id="keep_track_of_search">Track Copied Text On Page</button>
+    </div>
+</body>
+</html>
