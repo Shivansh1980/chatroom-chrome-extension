@@ -12,9 +12,9 @@ This Chatroom Chrom Extension is developed for improving the Chatroom features a
 ## How to use ?
 <img src="screenshots/Extension.png" width="200px" height="400px">
 <p>
-    1. Write username which you have already created on Awesome Chatroom(its another project that I have developed and its also available on github you can check it out) and then
-    2. Enter room name to which you want to send messages after connection
-    3. Now click on connect button and then open a new webpage say google.com
-    4. there you will see an option menu which the extension will provide
-    5. Now on google.com or any other site highlight some text using your mouse's cursor and after highlighting click on send text to chatrooom and then you will recieve a notification with the message that you sent.
+    1. Write username which you have already created on Awesome Chatroom(its another project that I have developed and its also available on github you can check it out) <br>
+    2. Enter room name to which you want to send messages after connection <br>
+    3. Now click on connect button and then open a new webpage say google.com <br>
+    4. there you will see an option menu which the extension will provide <br>
+    5. Now on google.com or any other site highlight some text using your mouse's cursor and after highlighting click on send text to chatrooom and then you will recieve a notification with the message that you sent. <br>
 </p>
