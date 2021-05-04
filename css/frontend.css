@@ -32,3 +32,17 @@
     text-align: center;
     text-shadow: 1px 1px 5px black;
 }
+
+.sent_questions{
+    position: relative;
+}
+.sent_questions_text{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size:15px;
+    background-color:green;
+    border-radius:20%;
+    color: black;
+    padding:5px;
+}
