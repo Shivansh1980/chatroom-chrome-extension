@@ -19,17 +19,18 @@ function execute_checks() {
         }
     })
 }
+
 function run_events() {
     $("#connect_awesome_chatroom").click(function (e) {
         var username = $('#username').val();
         var roomname = $('#roomname').val();
+
         var user_data = {
             'username': username,
             'roomname': roomname
         }
-        chrome.storage.local.set({
-            'user_data': user_data
-        })
+        chrome.storage.local.clear();
+        chrome.storage.local.set({'user_info': user_data })
         chrome.tabs.query({ active: true, currentWindow: true }, function (activeTabs) {
             chrome.tabs.sendMessage(activeTabs[0].id, { action: 'connect_with_chatroom', username: username, roomname: roomname });
         });
