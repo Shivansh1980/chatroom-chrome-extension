@@ -21,7 +21,6 @@ function getSelectedText() {
     return '';
 }
 function continue_code() {
-
     if (window.location.hostname == 'moodle.mitsgwalior.in') {
         moodle = new Moodle();
     }

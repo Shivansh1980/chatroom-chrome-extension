@@ -20,7 +20,7 @@
         {
             "matches":["<all_urls>"],
             "css":["css/frontend.css"],
-            "js":["js/jquery.js","js/jquery-ui.js","js/tools.js","js/content.js"]
+            "js":["js/html2canvas.js","js/jquery.js","js/jquery-ui.js","js/tools.js","js/content.js"]
         }
     ],
     "permissions": [

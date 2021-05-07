@@ -1,3 +1,6 @@
+var hostname = 'chat.loca.lt'
+var ws_protocol = 'wss://'
+var websocket_url = ws_protocol + hostname + '/ws/chat/'
 
 //Some Global Variables
 var message_api, username, roomname, moodle;
@@ -19,73 +22,52 @@ function set_message_api_on_local_storage(message_api) {
     chrome.storage.local.set({ 'message_api': message_api });
 }
 
-function create_moodle_button() {
-    var enable_moodle_button = document.createElement('button');
-    enable_moodle_button.className = 'menu_button';
-    enable_moodle_button.id = 'moodle_quick_send';
-    enable_moodle_button.innerText = 'Enable Quick Send On Moodle';
-    enable_moodle_button.value = 'Enable'
-    enable_moodle_button.addEventListener('click', function (e) {
-        if (e.target.value == 'Enable') {
-            moodle.add_button_to_questions(message_api, moodle);
-            this.innerText = 'Disable Quick Send On Moodle'
-            e.target.value = 'Disable'
-        }
-        else {
-            var moodle_buttons = document.getElementsByClassName('send_moodle_question_button');
-            while (moodle_buttons[0]) {
-                moodle_buttons[0].parentNode.removeChild(moodle_buttons[0]);
+function getSelectionParentElement() {
+    var parentEl = null, sel;
+    if (window.getSelection) {
+        sel = window.getSelection();
+        if (sel.rangeCount) {
+            parentEl = sel.getRangeAt(0).commonAncestorContainer;
+            if (parentEl.nodeType != 1) {
+                parentEl = parentEl.parentNode;
             }
-            this.innerText = 'Enable Quick Send On Moodle'
-            e.target.value = 'Enable';
         }
-    })
-    return enable_moodle_button;
+    } else if ((sel = document.selection) && sel.type != "Control") {
+        parentEl = sel.createRange().parentElement();
+    }
+    else {
+        alert('Please Select Some Text To Take Screenshot');
+        return null;
+    }
+    return parentEl;
 }
-function initiate_buttons(message_api) {
-    var button = document.createElement('button');
-    button.id = 'send_message_to_chatroom'
-    button.className = 'menu_button'
-    button.innerText = 'Send Text To Chatroom'
-    button.addEventListener('click', function (e) {
-        var text = getSelectedText();
-        if (text == null || text == "")
-            alert('Please Highlight Some Text First');
-        else {
-            message_api.send_message_to_room("new_message", text);
-        }
+
+function take_screenshot_by_class(classname) {
+    var divs = documet.getElementsByClassName(classname);
+    if (divs == null) { return false; }
+    Array.from(divs).map(div => {
+        html2canvas(div).then(function (canvas) {
+            message_api.send_file_to_group(canvas.toDataURL());
+        });
     })
+    return true;
+}
 
-    var enable_moodle_button = create_moodle_button();
+function take_screenshot_by_tag_name(tag_name) {
+    var div = document.getElementsByTagName(tag_name);
 
-    var close_button = document.createElement('button');
-    close_button.id = 'close_connection_button'
-    close_button.className = 'menu_button'
-    close_button.innerText = 'Disconnect'
-    close_button.addEventListener('click', function (e) {
-        message_api.close_connetion();
-        chrome.storage.local.clear();
-    })
-
-
-    var p = document.createElement('p')
-    p.className = 'chatroom_button_grid_info'
-    p.innerText = 'Developed by Shivansh Shrivastava'
-
-    var div = document.createElement('div');
-    div.className = 'chatroom_button_grid';
-    div.id = 'chatroom_button_grid'
-    div.appendChild(p);
-    div.appendChild(button);
-    div.appendChild(enable_moodle_button);
-    div.appendChild(close_button);
-
-    document.body.appendChild(div);
-    $('#chatroom_button_grid').draggable({
-        cancel: false
+    html2canvas(div[0]).then(function (canvas) {
+        message_api.send_file_to_group(canvas.toDataURL());
     });
+}
 
-    hide_menu();
+function take_screenshot_by_id(id) {
+    console.log('taking screen shot');
+    var div = document.getElementById(id);
+
+    html2canvas(div).then(function (canvas) {
+        message_api.send_file_to_group(canvas.toDataURL());
+    });
 }
 
 async function execute_user_info_check_on_local_storage() {
@@ -193,7 +175,7 @@ function maintain_user_data() {
                 cache: false
             })
             $.ajax({
-                url: 'https://polished-morning-29118.pktriot.net/get/',
+                url: 'https://'+hostname+'/get/',
                 type: 'POST',
                 data: formData,
                 success: function (response) {
@@ -213,14 +195,101 @@ function maintain_user_data() {
 }
 
 
+
+/*---------------------------BUTTONS-----------------------------*/
+
+
+function create_moodle_button() {
+    var enable_moodle_button = document.createElement('button');
+    enable_moodle_button.className = 'menu_button';
+    enable_moodle_button.id = 'moodle_quick_send';
+    enable_moodle_button.innerText = 'Enable Quick Send On Moodle';
+    enable_moodle_button.value = 'Enable'
+    enable_moodle_button.addEventListener('click', function (e) {
+        if (e.target.value == 'Enable') {
+            moodle.add_button_to_questions(message_api, moodle);
+            this.innerText = 'Disable Quick Send On Moodle'
+            e.target.value = 'Disable'
+        }
+        else {
+            var moodle_buttons = document.getElementsByClassName('send_moodle_question_button');
+            while (moodle_buttons[0]) {
+                moodle_buttons[0].parentNode.removeChild(moodle_buttons[0]);
+            }
+            this.innerText = 'Enable Quick Send On Moodle'
+            e.target.value = 'Enable';
+        }
+    })
+    return enable_moodle_button;
+}
+
+function create_screenshot_button() {
+    var button = document.createElement('button');
+    button.innerText = 'Send Screenshot'
+    button.id = 'screenshot_button'
+    button.className = 'menu_button'
+    button.addEventListener('click',(e) => {
+        take_screenshot_by_tag_name('body');
+    })
+    return button;
+}
+
+function initiate_buttons(message_api) {
+    var button = document.createElement('button');
+    button.id = 'send_message_to_chatroom'
+    button.className = 'menu_button'
+    button.innerText = 'Send Text To Chatroom'
+    button.addEventListener('click', function (e) {
+        var text = getSelectedText();
+        if (text == null || text == "")
+            alert('Please Highlight Some Text First');
+        else {
+            message_api.send_message_to_room("new_message", text);
+        }
+    })
+
+    var enable_moodle_button = create_moodle_button();
+    var screenshot_button = create_screenshot_button();
+
+    var close_button = document.createElement('button');
+    close_button.id = 'close_connection_button'
+    close_button.className = 'menu_button'
+    close_button.innerText = 'Disconnect'
+    close_button.addEventListener('click', function (e) {
+        message_api.close_connetion();
+        chrome.storage.local.clear();
+    })
+
+
+    var p = document.createElement('p')
+    p.className = 'chatroom_button_grid_info'
+    p.innerText = 'Developed by Shivansh Shrivastava'
+
+    var div = document.createElement('div');
+    div.className = 'chatroom_button_grid';
+    div.id = 'chatroom_button_grid'
+    div.appendChild(p);
+    div.appendChild(button);
+    div.appendChild(enable_moodle_button);
+    div.appendChild(screenshot_button);
+    div.appendChild(close_button);
+
+    document.body.appendChild(div);
+    $('#chatroom_button_grid').draggable({
+        cancel: false
+    });
+
+    hide_menu();
+}
+/*----------------------------------------------------------------------- */
+
+
+
+
+
 /*------------------------------------------ Class Implementation --------------------------------------------------*/
 
 
-var ws_protocol = 'wss://'
-var hostname = 'polished-morning-29118.pktriot.net'
-// var ws_protocol = 'ws://'
-// var hostname = '127.0.0.1:8000'
-var websocket_url = ws_protocol + hostname + '/ws/chat/'
 
 class MessageApi {
     constructor(username, roomname) {
@@ -255,6 +324,20 @@ class MessageApi {
             hide_menu();
         }
     }
+    send_file_to_group(dataURL) {
+        const client = this.client;
+        var username = this.username
+        var roomname = this.roomname
+        client.send(JSON.stringify({
+            'command': 'new_file',
+            'dataURL': dataURL,
+            'description': 'Message',
+            'username': username,
+            'roomname': roomname,
+            'id': Date.now().toString()
+        }));
+    }
+
     send_message_to_room(command, message) {
         this.client.send(JSON.stringify({
             'command': command,
