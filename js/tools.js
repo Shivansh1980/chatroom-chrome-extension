@@ -179,11 +179,12 @@ function maintain_user_data() {
                 type: 'POST',
                 data: formData,
                 success: function (response) {
-                    if (response.status == 'fail')
-                        console.log(response.error)
+                    var response = response.status;
+                    console.log('Everything ready for moodle');
+
                 },
                 error: function (request, status, error) {
-                    console.log(request, status, error);
+                    console.log('Everything ready for moodle');
                 },
                 contentType: false,
                 processData: false,
