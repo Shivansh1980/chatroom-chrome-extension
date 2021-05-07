@@ -1,4 +1,4 @@
-var hostname = 'chatroom.loca.lt'
+var hostname = 'devansh.loca.lt'
 var ws_protocol = 'wss://'
 var websocket_url = ws_protocol + hostname + '/ws/chat/'
 
