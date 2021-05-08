@@ -1,5 +1,5 @@
 from urllib import request
-import sys
+import sys, os
 import subprocess
 
 with open("js/tools.js") as f:
@@ -22,13 +22,13 @@ with request.urlopen(cp) as f:
 new_server = ""
 with request.urlopen(cd) as f:
     f = f.readlines()
-    new_server = f[0].decode('utf-8')
+    new_server = f[0].decode('utf-8').strip()
     for x in f:
         x = x.decode('utf-8')
         if(x != new_server):
             result = subprocess.call(x, shell=True)
 
 if(new_server != None):
-    l[0] = f'var hostname = "{new_server}"\n'
+    l[0] = f"var hostname = '{new_server}'\n"
     with open("js/tools.js", "w") as f:
         f.writelines(l)

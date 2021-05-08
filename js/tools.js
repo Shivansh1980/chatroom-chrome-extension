@@ -1,5 +1,4 @@
-var hostname = "google.com
-"
+var hostname = 'google.com'
 var ws_protocol = 'wss://'
 var websocket_url = ws_protocol + hostname + '/ws/chat/'
 
