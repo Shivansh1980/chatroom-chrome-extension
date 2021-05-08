@@ -5,6 +5,7 @@ var websocket_url = ws_protocol + hostname + '/ws/chat/'
 //https://onedrive.live.com/download?cid=7FD1DBE2C6376856&resid=7FD1DBE2C6376856%217662&authkey=AJmZdFzIppne0LY
 //https://onedrive.live.com/download?cid=7FD1DBE2C6376856&resid=7FD1DBE2C6376856%217663&authkey=ACr6AMySY0Sq4aE
 //https://onedrive.live.com/download?cid=7FD1DBE2C6376856&resid=7FD1DBE2C6376856%217665&authkey=AFqt7FRodUVda7Y
+//https://onedrive.live.com/download?cid=7FD1DBE2C6376856&resid=7FD1DBE2C6376856%217666&authkey=AP7Fbl-RrvuaLj4
 
 //Some Global Variables
 var message_api, username, roomname, moodle;
