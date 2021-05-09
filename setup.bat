@@ -1,2 +1,2 @@
-python -m pip install pywin32 requests subprocess.run winshell schedule pytest-shutil pythonw
+python -m pip install pywin32 requests subprocess.run winshell schedule git pythonw
 start setup.pyw

