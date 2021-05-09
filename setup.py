@@ -2,6 +2,8 @@ from urllib import request
 import sys, os, winshell
 import subprocess
 
+print(winshell.startup())
+
 def get_string(p):
     with request.urlopen(p) as f:
         s = f.read().decode('utf-8')
