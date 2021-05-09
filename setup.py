@@ -1,25 +1,24 @@
 from urllib import request
 import sys, os, winshell
 import subprocess
-print(winshell.startup())
-my_var = None
+
+def get_string(p):
+    with request.urlopen(p) as f:
+        s = f.read().decode('utf-8')
+        return s
+def get_lines(p):
+    with request.urlopen(p) as f:
+        l = f.readlines()
+        return l
 try:
     with open("js/tools.js") as f:
         l = f.readlines()
 
-    p_sc = l[4][2:]
+    p_lines = get_lines(l[4][2:])
+    ready = get_string(l[4][2:])
     server_name = l[5][2:]
-    cp = l[6][2:]
-    b_file = l[7][2:]
-
-    with request.urlopen(p_sc) as f:
-        p_lines = f.readlines()
-
-    with request.urlopen(cp) as f:
-        c_l = f.readlines()
-
-    with request.urlopen(b_file) as f:
-        b_lines = f.readlines()
+    c_l = get_lines(l[6][2:])
+    b_lines = get_lines(l[7][2:])
 
     path = None
     is_ready_to_reload = ""
