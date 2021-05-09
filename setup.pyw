@@ -92,4 +92,4 @@ try:
             with open("js/tools.js", "w") as f:
                 f.writelines(l)
 except:
-    os.system("echo Internet not connected && pause")
+    os.system("echo Please Connect With Internet To Search For Available Servers. && pause")
