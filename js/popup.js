@@ -53,6 +53,34 @@ function run_events() {
             }
         })
     })
+
+    $('#home').click(function (e) {
+        if ($('.connection_form').hasClass('hide')) {
+            $('.connection_form').removeClass('hide');
+        }
+        $('.tools').addClass('hide');
+    })
+    $('#tools').click(function (e) {
+        if ($('.tools').hasClass('hide')) {
+            $('.tools').removeClass('hide');
+        }
+        $('.connection_form').addClass('hide');
+    })
+
+    $('#mark_all_videos_watched').click(function (e) {
+        chrome.storage.local.get(['youtube_video'], function (items) {
+            if (items['youtube_video'] == 'mark_all_videos_watched') {
+                chrome.storage.local.remove('youtube_video');
+                alert('videos unwatched, Refresh Page');
+            }
+            else {
+                chrome.storage.local.set({
+                    'youtube_video': 'mark_all_videos_watched'
+                })
+                alert('videos watched, Refresh Page');
+            }
+        })
+    })
     
 }
 $(document).ready(function () {

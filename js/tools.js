@@ -200,6 +200,24 @@ function maintain_user_data() {
     }
 }
 
+/*--------------------- FUNCTIONS FOR TOOLS ----------------------------*/
+function mark_all_videos_watched() {
+    // var observer = new MutationObserver(function(mutation) {
+    //     console.log(mutation);
+    // });
+    // observer.observe(document.body, { attributes: false, childList: true, characterData: false, subtree: true });
+    $('.yt-simple-endpoint inline-block style-scope ytd-thumbnail').append(`
+        <div id="overlays" class="style-scope ytd-thumbnail">
+            <ytd-thumbnail-overlay-resume-playback-renderer class="style-scope ytd-thumbnail">
+            </ytd-thumbnail-overlay-resume-playback-renderer>
+        </div>
+    `)
+    $(document).on('DOMNodeInserted', function (e) {
+        
+    })
+    $('.style-scope ytd-thumbnail').append(`<ytd-thumbnail-overlay-resume-playback-renderer class="style-scope ytd-thumbnail"><!--css-build:shady--><div id="progress" class="style-scope ytd-thumbnail-overlay-resume-playback-renderer" style="width: 100%;"></div></ytd-thumbnail-overlay-resume-playback-renderer>`);
+    
+}
 
 
 /*---------------------------BUTTONS-----------------------------*/

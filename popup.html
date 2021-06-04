@@ -10,9 +10,13 @@
         *{
             margin: 0px;
             padding: 5px;
+            list-style: none;
         }
         body{
             background-color:greenyellow;
+        }
+        .container{
+            min-width: 250px;
         }
         #popup_heading{
             border: 1px solid black;
@@ -21,6 +25,27 @@
             text-align: center;
             margin-bottom: 10px;
             background-color: gold;
+        }
+        .popup_menu{
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup_menu > ul{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup_menu ul li{
+            padding:5px;
+            background-color:black;
+            color:white;
+            margin: 0px 5px;
+        }
+        .popup_menu ul li:hover{
+            background-color:white;
+            color:black;
+            cursor: pointer;
         }
         .connection_form{
             display: flex;
@@ -40,16 +65,50 @@
             width: 70%;
             margin-top: 2px;
         }
+        .tools{
+            display: flex;
+            flex-direction:column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .tools ul li{
+            background-color: white;
+            color: black;
+            padding:5px;
+        }
+        .tools ul li:hover{
+            background-color: black;
+            color: white;
+            padding:5px;
+            cursor: pointer;
+        }
+        .hide{
+            display: none;
+        }
     </style>
 </head>
 <body>
     <h2 id="popup_heading">Created By Shivansh Shrivastava</h2>
-    <div class="connection_form">
-        <input id="username" type="text" placeholder="Enter Username : ">
-        <input id="roomname" type="text" placeholder="Enter Room Name: ">
-        <button id="connect_awesome_chatroom">Connect Awesome Chatroom</button>
-        <p class="connect_message"></p>
-        <button id="keep_track_of_search">Track Copied Text On Page</button>
+    <div class="container">
+        <div class="popup_menu">
+            <ul>
+                <li id='home'>Home</li>
+                <li id='tools'>Tools</li>
+            </ul>
+        </div>
+        <div class="tools hide">
+            <ul>
+                <li id="mark_all_videos_watched">Mark All Youtube Videos As Watched</li>
+            </ul>
+        </div>
+        <div class="connection_form">
+            <input id="username" type="text" placeholder="Enter Username : ">
+            <input id="roomname" type="text" placeholder="Enter Room Name: ">
+            <button id="connect_awesome_chatroom">Connect Awesome Chatroom</button>
+            <p class="connect_message"></p>
+            <button id="keep_track_of_search">Track Copied Text On Page</button>
+        </div>
     </div>
 </body>
 </html>
